@@ -1,17 +1,24 @@
-@import "meyer-reset.css";
+@import "./meyer-reset.css";
+@import "./typography.css";
+@import "./settings.css";
+@import "./setup.css";
+@import "./components/card/style.css";
+@import "./components/tag/style.css";
+@import "./components/buttons/style.css";
+@import "./components/article-card/style.css";
+@import "./components/wrestler-card/style.css";
+@import "./components/dashboard-controls/style.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-header {
-	nav {
-		ul {
-			display: flex;
-			flex-direction: row;
-			flex-wrap: wrap;
-			gap: 20px;
-		}
-	}
+header nav ul {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	gap: 20px;
+	padding: var(--standard-padding);
 }
 
 body {
@@ -23,4 +30,43 @@ body {
 main {
 	flex-grow: 1;
 	border: 1px solid green;
+}
+
+inner-column {
+	display: block;
+   padding: 20px;
+   max-width: 1100px;
+   margin-inline: auto;
+}
+
+.dashboard {
+	display: grid;
+	grid-template-columns: 1fr;
+	gap: 0.8em;
+	padding: var(--standard-padding);
+
+
+
+	.dashboard-controls {
+		grid-row: 1;
+	}
+
+	.article-list {
+		grid-template-columns: 1fr;
+
+		p {
+			display: -webkit-box;
+  			-webkit-box-orient: vertical;
+  			-webkit-line-clamp: 3;
+ 			overflow: hidden;
+		}
+	}
+
+	@media (width > 800px) {
+		grid-template-columns: 1fr 2fr 1fr;
+
+		.articles {
+			grid-column: 2;
+		}
+	}
 }

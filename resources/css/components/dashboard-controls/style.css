@@ -1,0 +1,13 @@
+.dashboard-controls {
+	display: block;
+   border: 5px solid #e2e8f0;
+   border-radius: 16px;
+   background: #fff;
+   box-shadow: 0 1px 2px rgba(0, 0, 0, .06);
+   line-height: 2em;
+   padding: var(--standard-padding);
+
+   select {
+   	width: 100%;
+   }
+}

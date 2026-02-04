@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Wrestler;
 use App\Models\Bout;
@@ -17,6 +18,12 @@ Route::get('/articles', function() {
         "articles" => Article::all()
     ]);
 });
+
+Route::get('/article-detail/{article}', function (Article $article) {
+    return view('article-detail', [
+        'article' => $article,
+    ]);
+})->name('articles.show');
 
 Route::get('wrestlers', [WrestlerController::class, 'getWrestlers']);
 
@@ -61,7 +68,7 @@ Route::get('/promotions', function() {
 });
 
 Route::get('/promotions/{promotion}',function (Promotion $promotion) {
-    $promotion->load('wrestlers');
+    $promotion->load(['wrestlers', 'articles']);
 
     return view('promotion', [
         "promotion" => $promotion
@@ -77,4 +84,40 @@ Route::get('/promotions/{promotion}',function (Promotion $promotion) {
 
 Route::get('/post/create', [PostController::class, 'create']);
 Route::post('/post', [PostController::class, 'store']);
+
+Route::get('/dashboard', function (Request $request) {
+    $selectedPromotions = collect($request->input('promotions', []))
+        ->filter()
+        ->map(fn ($id) => (int) $id)
+        ->values()
+        ->all();
+
+    //always load all promotions    
+    $promotions = Promotion::orderBy('name')->get();
+
+    // filtered if promotions selected
+    $articlesQuery = Article::latest()->take(3);
+
+    if (!empty($selectedPromotions)) {
+        $articlesQuery->whereIn('promotion_id', $selectedPromotions);
+    }
+
+    $articles = $articlesQuery->get();
+
+    //getting wrestlers if promotion is selected
+    $wrestlersQuery = Wrestler::latest()->take(20);
+
+    if (!empty($selectedPromotions)) {
+        $wrestlersQuery->whereIn('promotion_id', $selectedPromotions);
+    }
+
+    $wrestlers = $wrestlersQuery->get();
+
+    return view('dashboard', [
+        'promotions' => $promotions,
+        'selectedPromotions' => $selectedPromotions,
+        'articles' => $articles,
+        'wrestlers' => $wrestlers,
+    ]);
+})->name('dashboard');
 

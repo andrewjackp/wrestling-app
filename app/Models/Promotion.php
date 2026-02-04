@@ -17,6 +17,10 @@ class Promotion extends Model
         return $this->hasMany(Wrestler::class);
     }
 
+    public function articles()
+    {
+        return $this->hasMany(\App\Models\Article::class);
+    }
     // protected $casts = [
     //     'wrestlers' => 'array',
     // ];

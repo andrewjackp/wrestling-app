@@ -1,12 +1,14 @@
 <x-layout>
-
-<h1>Create Wrestler</h1>
+<inner-column>
+	<h1>Create Wrestler</h1>
 	
 	@if (Session::has('fail'))
 		<span>{{Session::get('fail')}}</span>
 	@endif
-	<form class="add-wrestler-form" action="{{route('addWrestler')}}" method="post">
+	<form class="add-wrestler-form" action="{{route('addWrestler')}}" method="post"> 
 		@csrf
+		@method('POST')
+
 		<label for="full_name">Wrestler Name</label>
 		<input type="text" value="{{old('name')}}" name="name" class="@error('name') is-invalid @enderror">
 		
@@ -19,7 +21,7 @@
 			@endforeach
 		</select>
 
-		<button type="submit">Save</button>
+		<x-submit-btn type="submit" href="#" variant="secondary">Save</x-submit-btn>
 	</form>
 
 		@if ($errors->any())
@@ -31,5 +33,5 @@
 	        </ul>
 	    </div>
 	@endif
-
+</inner-column>
 </x-layout>

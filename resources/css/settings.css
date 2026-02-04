@@ -1,0 +1,18 @@
+html {
+	--blue: #3e65e1;
+	--darkblue: #2f55db;
+	--grey: #616161;
+	--lightgrey: #797979;
+	--xtra-lightgrey: #d9d9d9;
+	--white: #FFFFFF;
+	--red: #b91c1c;
+	--lightred: #fca5a5;
+	--lightblack: #1f2937;
+	--black: #000;
+	--green: #065f46;
+	--lightgreen: #d1fae5;
+	--small-border-radius: 5px;
+	--large-border-radius: 85px;
+
+	--standard-padding: 10px;
+}

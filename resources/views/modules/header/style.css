@@ -1,7 +1,0 @@
-header {
-	nav {
-		display: flex;
-		flex-direction: row;
-		flex-wrap: wrap;
-	}
-}

@@ -1,0 +1,45 @@
+.article-card {
+  border: 2px solid var(--black);
+}
+
+.article-list {
+	display: grid;
+	gap: 10px;
+
+	@media (width > 600px) {
+		grid-template-columns: 1fr 1fr;
+	}
+}
+
+.article-list__item {
+  list-style: none;
+}
+
+.article-card__heading {
+  min-width: 0;
+  padding: 100px;
+}
+
+.article-card__title {
+  font-weight: 800;
+}
+
+.article-card__content {
+  
+}
+
+.article-card__footer-left,
+.article-card__footer-right {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.link:hover {
+  text-decoration: underline;
+}

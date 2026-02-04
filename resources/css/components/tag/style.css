@@ -1,0 +1,15 @@
+.tag {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  border-color: var(--grey);
+  padding: 4px 8px;
+  font-size: 12px;
+  background: var(--blue);
+  color: var(--white);
+}
+
+.tag--success {
+  background: var(--lightgreen);
+  color: var(--green);
+}

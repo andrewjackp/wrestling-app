@@ -1,7 +1,13 @@
 <x-layout>
    <ul>
-      @foreach($bout->wrestlers as $wrestler)
-         <li><a href="/wrestler/{{$wrestler->id}}">{{$wrestler->name}}</a></li>
+      <inner-column>
+         @foreach($bout->wrestlers as $wrestler)
+            <li>
+               <a href="/wrestler/{{$wrestler->id}}">
+                  {{$wrestler->name}}
+               </a>
+            </li>
       @endforeach
+      </inner-column>
    </ul>
 </x-layout>

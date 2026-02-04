@@ -1,4 +1,5 @@
 <x-layout>
+	<inner-column>
 	@if (Session::has('failed'))
 		<span>{{Session::get('failed')}}</span>
 	@endif
@@ -15,12 +16,13 @@
 </form>
 
 @if ($errors->any())
-	        <ul>
-	            @foreach ($errors->all() as $error)
-	                <li>{{ $error }}</li>
-	            @endforeach
-	        </ul>
-	@endif
+	<ul>
+	   @foreach ($errors->all() as $error)
+	      <li>{{ $error }}</li>
+	   @endforeach
+	</ul>
+@endif
 
 <a href="/wrestler/{{$wrestler->id}}/delete">Delete</a>
+	</inner-column>
 </x-layout>

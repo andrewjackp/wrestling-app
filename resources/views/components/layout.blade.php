@@ -11,7 +11,7 @@
     @include('modules.header.header')
 
     <main>
-        {{$slot}}
+       {{$slot}}   
     </main>
 
 </body>

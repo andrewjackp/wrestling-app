@@ -26,17 +26,15 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
         ]);
 
-        Article::factory()->create([
-            'title' => 'Cena wins',
-            'content' => 'He won of course.'
-        ]);
-
 
         Promotion::factory()
             ->count(4)
             ->has(Wrestler::factory()->count(rand(3,7)))
             ->create();
-            
+
+        Article::factory()
+            ->count(10)
+            ->create();            
 
         Wrestler::factory()->create([
             'name' => 'Steve Austin',

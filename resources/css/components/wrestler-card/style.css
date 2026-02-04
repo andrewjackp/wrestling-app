@@ -1,0 +1,8 @@
+.wrestler-card {
+	border: 3px dotted var(--black);
+	height: auto;
+
+	.card_footer {
+		margin-top: auto;
+	}
+}

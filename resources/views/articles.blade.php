@@ -1,9 +1,12 @@
 <x-layout>
-   <ul>
+  <inner-column>
+    <ul class='article-list'>
       @foreach($articles as $article)
-         <li>{{$article->title}}</li>
-      @endforeach   
-   </ul>  
+        <x-article-card :article="$article" />
+      @endforeach
+    </ul>
+  </inner-column>
 </x-layout>
+
       
  
