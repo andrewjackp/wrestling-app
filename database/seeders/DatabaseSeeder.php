@@ -36,6 +36,14 @@ class DatabaseSeeder extends Seeder
             ->count(10)
             ->create();            
 
+        $wwe = Promotion::factory()->create(['name' => 'WWE']);
+        Wrestler::factory()->count(10)->forPromotion($wwe)->create();
+        Article::factory()->count(3)->forPromotion($wwe)->create();
+
+        $aew = Promotion::factory()->create(['name' => 'AEW']);
+        Wrestler::factory()->count(10)->forPromotion($aew)->create();
+        Article::factory()->count(5)->forPromotion($aew)->create();
+
         Wrestler::factory()->create([
             'name' => 'Steve Austin',
             'promotion_id' => 1,

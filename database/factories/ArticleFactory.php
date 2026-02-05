@@ -3,6 +3,7 @@
 namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Database\Factories\Concerns\ForPromotion;
 use App\Models\Promotion;
 
 /**
@@ -15,6 +16,9 @@ class ArticleFactory extends Factory
      *
      * @return array<string, mixed>
      */
+    
+    use ForPromotion;
+
     public function definition(): array
     {
         return [

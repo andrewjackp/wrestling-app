@@ -4,8 +4,9 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-use app\Models\Wrestler;
-use app\Models\Promotion;
+use App\Models\Bout;
+use App\Models\Wrestler;
+use App\Models\Promotion;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Model>
@@ -18,12 +19,41 @@ class BoutFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {
-        return [
-            "title" => fake()->title(),
-            'promotion_id' => Promotion::factory()
-        ];
+        {
+            return [
+                "title" => fake()->sentence(3),
+                "promotion_id" => Promotion::query()->inRandomOrder()->value('id') ?? Promotion::factory(),
+            ];
+        }
+
+    public function configure(): static
+        {
+            return $this->afterCreating(function (Bout $bout) {
+
+            $promotionId = $bout->promotion_id;
+
+            // establish that we have enough wrestlers for the promotions
+
+            $existing = Wrestler::where('promotion_id', $promotionId)->count();
+
+            if ($existing < 4) {
+                Wrestler::factory()
+                    ->count(6)
+                    ->create(['promotion_id' => $promotionId]);
+            }
+
+            // Attach 2–4 wrestlers from the SAME promotion
+            $wrestlerIds = Wrestler::where('promotion_id', $promotionId)
+                ->inRandomOrder()
+                ->limit(fake()->numberBetween(2, 4))
+                ->pluck('id')
+                ->all();
+
+            $bout->wrestlers()->sync($wrestlerIds);
+            //sync method attaches ids 
+        });
     }
+
 }
 
 /*
