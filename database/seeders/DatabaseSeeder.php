@@ -27,22 +27,38 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        Promotion::factory()
-            ->count(4)
-            ->has(Wrestler::factory()->count(rand(3,7)))
-            ->create();
+        // Promotion::factory()
+        //     ->count(4)
+        //     ->has(Wrestler::factory()->count(rand(3,7)))
+        //     ->create();
 
         Article::factory()
             ->count(10)
             ->create();            
 
         $wwe = Promotion::factory()->create(['name' => 'WWE']);
-        Wrestler::factory()->count(10)->forPromotion($wwe)->create();
-        Article::factory()->count(3)->forPromotion($wwe)->create();
+        foreach (config('rosters.WWE') as $name) {
+            Wrestler::factory()->forPromotion($wwe)->create(['name' => $name]);
+        }
+        Article::factory()->count(1)->forPromotion($wwe)->create();
 
         $aew = Promotion::factory()->create(['name' => 'AEW']);
-        Wrestler::factory()->count(10)->forPromotion($aew)->create();
+        foreach (config('rosters.AEW') as $name) {
+            Wrestler::factory()->forPromotion($aew)->create(['name' => $name]);
+        }
         Article::factory()->count(5)->forPromotion($aew)->create();
+
+        $njpw = Promotion::factory()->create(['name' => 'NJPW']);
+         foreach (config('rosters.NJPW') as $name) {
+            Wrestler::factory()->forPromotion($njpw)->create(['name' => $name]);
+        }
+        Article::factory()->count(5)->forPromotion($njpw)->create();
+
+        $cmll = Promotion::factory()->create(['name' => 'CMLL']);
+        foreach(config('rosters.CMLL') as $name) {
+            Wrestler::factory()->forPromotion($cmll)->create(['name' => $name]);
+        }
+        Article::factory()->count(5)->forPromotion($cmll)->create();
 
         Wrestler::factory()->create([
             'name' => 'Steve Austin',
