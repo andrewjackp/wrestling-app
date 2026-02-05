@@ -11,9 +11,9 @@ use Illuminate\Support\Facades\Validator;
 class WrestlerController extends Controller
 {
     public function getWrestlers() {
-        return view ('wrestlers', [
-        "wrestlers" => Wrestler::all()
-    ]);
+            return view ('wrestlers', [
+            "wrestlers" => Wrestler::all()->sortBy('name')
+        ]);
     }
    
     public function loadAddWrestlerForm(Wrestler $wrestler) {
