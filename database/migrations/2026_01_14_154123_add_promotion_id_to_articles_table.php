@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::table('articles', function (Blueprint $table) {
             $table->foreignId('promotion_id')
-                  ->nullable()                // nullable if some articles aren't tied to a promotion
+                  ->nullable() 
+                  // nullable if some articles aren't tied to a promotion
                   ->constrained()
-                  ->nullOnDelete();           // if a promotion is deleted, promotion_id becomes NULL
+                  ->nullOnDelete(); 
+                  // if a promotion is deleted, promotion_id becomes NULL
         });
     }
 
