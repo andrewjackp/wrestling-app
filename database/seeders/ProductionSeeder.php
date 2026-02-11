@@ -94,11 +94,11 @@ class ProductionSeeder extends Seeder
     {
         $articles = [
             [
-                'article_title' => "{$promotionName} Weekly Rundown",
+                'title' => "{$promotionName} Weekly Rundown",
                 'content' => "A quick weekly recap for {$promotionName}.",
             ],
             [
-                'article_title' => "{$promotionName} Roster Spotlight",
+                'title' => "{$promotionName} Roster Spotlight",
                 'content' => "A spotlight on a few key names in {$promotionName}.",
             ],
         ];
@@ -106,7 +106,7 @@ class ProductionSeeder extends Seeder
         foreach ($articles as $a) {
             $exists = Article::query()
                 ->where('promotion_id', $promotionId)
-                ->where('article_title', $a['article_title'])
+                ->where('title', $a['title'])
                 ->exists();
 
             if ($exists) {
@@ -115,7 +115,7 @@ class ProductionSeeder extends Seeder
 
             $article = new Article();
             $article->forceFill([
-                'article_title' => $a['article_title'],
+                'title' => $a['title'],
                 'content' => $a['content'],
                 'promotion_id' => $promotionId,
             ])->save();
