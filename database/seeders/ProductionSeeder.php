@@ -17,7 +17,7 @@ class ProductionSeeder extends Seeder
         $rosters = [
             'WWE' => [
                 'Cody Rhodes',
-                'Seth Rollins',
+                'Seth FREAKIN Rollins',
                 'Roman Reigns',
                 'Rhea Ripley',
                 'Becky Lynch',
@@ -27,8 +27,24 @@ class ProductionSeeder extends Seeder
                 'Bryan Danielson',
                 'Jon Moxley',
                 'MJF',
+                'Hangman Adam Page',
+                'Swerve Strickland'
                 'Toni Storm',
             ],
+            'CMLL' => [
+                'Mistico',
+                'Soberano Jr.',
+                'Atlantis Jr.',
+                'Blue Panther',
+                'Ultimo Guerrero'
+            ],
+            'NJPW' => [
+                'Yota Tsuji',
+                'Aaron Wolf',
+                'Hirooki Goto',
+                'Zack Sabre, Jr.',
+                'Toru Yano',
+            ]
         ];
 
         foreach ($rosters as $promotionName => $names) {
