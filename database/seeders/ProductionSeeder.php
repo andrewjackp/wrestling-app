@@ -28,7 +28,7 @@ class ProductionSeeder extends Seeder
                 'Jon Moxley',
                 'MJF',
                 'Hangman Adam Page',
-                'Swerve Strickland'
+                'Swerve Strickland',
                 'Toni Storm',
             ],
             'CMLL' => [
