@@ -11,3 +11,39 @@
    	width: 100%;
    }
 }
+
+
+.nav-dropdown {
+  position: relative;
+}
+
+.nav-link {
+  cursor: pointer;
+  user-select: none;
+}
+
+/* hidden by default */
+.dropdown-panel {
+  position: absolute;
+  top: 100%;
+  left: 0;
+
+  background: white;
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  padding: 16px;
+  width: 260px;
+
+  display: none;
+  z-index: 100;
+}
+
+/* show on hover */
+.nav-dropdown:hover .dropdown-panel {
+  display: block;
+}
+
+.dropdown-panel select {
+  width: 100%;
+}

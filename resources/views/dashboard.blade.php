@@ -1,7 +1,7 @@
 <x-layout>
 	<inner-column>
 
-		<form method="GET" action="{{ route('dashboard') }}" class="dashboard-controls">
+{{-- 		<form method="GET" action="{{ route('dashboard') }}" class="dashboard-controls">
 			<fieldset>
   				<legend>Promotions</legend>
   				<p class="help">Hold Cmd/Ctrl to select multiple.</p>
@@ -19,7 +19,8 @@
 			</fieldset>
 
 		<button type="submit" class="btn btn--secondary">Update dashboard</button>
-		</form>
+		</form> --}}
+		
 		<div class="dashboard">			
 			<section class="promotions">
 				<h1 class='attention-voice'>PROMOTIONS</h1>

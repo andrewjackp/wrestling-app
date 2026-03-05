@@ -13,7 +13,7 @@ class ProductionSeeder extends Seeder
 {
     public function run(): void
     {
-        // Small, curated rosters (edit freely)
+        // Small rosters for production test
         $rosters = [
             'WWE' => [
                 'Cody Rhodes',
@@ -59,8 +59,7 @@ class ProductionSeeder extends Seeder
         }
     }
 
-    /**
-     * Create a promotion if it doesn't exist; otherwise return existing.
+    /* get promotion for wrestler, create one if doesn't exist.
      */
     private function upsertPromotionByName(string $name): Promotion
     {
@@ -78,9 +77,8 @@ class ProductionSeeder extends Seeder
         return $promotion;
     }
 
-    /**
-     * Create wrestler if missing for that promotion; otherwise keep existing.
-     * Uniqueness here is (promotion_id, name).
+    /* create wrestler if none for that promotion; otherwise keep existing.
+     * uniqueness here is (promotion_id, name).
      */
     private function upsertWrestlerByNameAndPromotion(string $name, int $promotionId): Wrestler
     {
