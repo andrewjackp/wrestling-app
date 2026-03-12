@@ -82,13 +82,13 @@ class ProductionSeeder extends Seeder
      */
     private function upsertWrestlerByNameAndPromotion(string $name, int $promotionId): Wrestler
     {
-        $existing = Wrestler::query()
-            ->where('promotion_id', $promotionId)
-            ->where('name', $name)
-            ->first();
+        $wrestler = Wrestler::query()->where('name', $name)->first();
 
-        if ($existing) {
-            return $existing;
+        if ($wrestler) {
+            $wrestler->promotion_id = $promotionId;
+            $wrestler->save();
+
+            return $wrestler;
         }
 
         $wrestler = new Wrestler();
