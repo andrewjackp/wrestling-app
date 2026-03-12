@@ -115,13 +115,13 @@ class ProductionSeeder extends Seeder
                 'title' => "{$promotionName} Roster Spotlight",
                 'content' => "A spotlight on a few key names in {$promotionName}.",
             ],
-        ];
+        ];  
 
         foreach ($articles as $a) {
             $exists = Article::query()
-                ->where('promotion_id', $promotionId)
-                ->where('title', $a['title'])
-                ->exists();
+            ->where('promotion_id', $promotionId)
+            ->where('article_title', $a['title'])
+            ->exists();
 
             if ($exists) {
                 continue;
@@ -129,7 +129,7 @@ class ProductionSeeder extends Seeder
 
             $article = new Article();
             $article->forceFill([
-                'title' => $a['title'],
+                'article_title' => $a['title'],
                 'content' => $a['content'],
                 'promotion_id' => $promotionId,
             ])->save();
