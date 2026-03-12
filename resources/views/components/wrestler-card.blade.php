@@ -9,7 +9,9 @@
 
 <li {{ $attributes->merge(['class' => 'wrestler-card']) }}>
 <x-card>
-
+	<li>
+  {{ $wrestler->id }} — {{ $wrestler->name }} — {{ $wrestler->promotion->name }}
+</li>
 	<x-card.header>
 		<div class="wrestler-card-heading">
 			<x-card.title class="wrestler-card-title">
