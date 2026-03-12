@@ -72,11 +72,6 @@ inner-column {
 	}*/
 }
 
-.dashboard {
-	display: grid;
-	gap: 0.8em;
-	grid-template-columns: 1fr;
-}
 
 @media (min-width: 800px) {
 	.dashboard {
