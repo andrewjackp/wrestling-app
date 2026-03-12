@@ -77,8 +77,8 @@ class ProductionSeeder extends Seeder
         return $promotion;
     }
 
-    /* create wrestler if none for that promotion; otherwise keep existing.
-     * uniqueness here is (promotion_id, name).
+    /* 
+     * uniqueness here is wrestler name, this prevents wrestlers belonging to wrong promotion.
      */
     private function upsertWrestlerByNameAndPromotion(string $name, int $promotionId): Wrestler
     {
