@@ -1,8 +1,32 @@
 .wrestler-card {
-	border: 3px dotted var(--black);
+	border: 2px solid var(--black);
 	height: auto;
+	border-radius: 0.8em;
 
 	.card_footer {
 		margin-top: auto;
 	}
 }
+
+.wrestler-card-body {
+	display: grid;
+	grid-template-columns: 1fr auto;
+	gap: 1rem;
+	align-items: center;
+}
+
+
+.wrestler-card-media {
+  aspect-ratio: 1 / 1;
+  max-width: 110px;
+  overflow: hidden;
+  border-radius: 50%;
+}
+
+.wrestler-card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+}
+

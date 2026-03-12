@@ -52,7 +52,7 @@ inner-column {
 	}
 
 	.article-list {
-		grid-template-columns: 1fr;
+/*		grid-template-columns: 1fr;*/
 
 		p {
 			display: -webkit-box;
@@ -62,12 +62,31 @@ inner-column {
 		}
 	}
 
-	@media (width > 800px) {
+/*	@media (width > 800px) {
 		grid-template-columns: 1fr 2fr 1fr;
 
 		.articles {
 			grid-row: 1;
 			grid-column: 2;
 		}
+	}*/
+}
+
+.dashboard {
+	display: grid;
+	gap: 0.8em;
+	grid-template-columns: 1fr;
+}
+
+@media (min-width: 800px) {
+	.dashboard {
+		grid-template-columns: 1fr 2fr 1fr;
 	}
+
+}
+
+.wrestler-list {
+	display: grid;
+	grid-template-columns: repeat(4, minmax(10px, 1fr));
+	gap: 0.8em;
 }

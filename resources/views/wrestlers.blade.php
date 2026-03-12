@@ -7,10 +7,10 @@
             @endif
 
     <h1 class='attention-voice'><a href="add/wrestler">Add Wrestlers</a></h1>
-        <ul>
+        <ul class="wrestler-list">
             @foreach($wrestlers as $wrestler)
-                <li><a href="/wrestler/{{$wrestler->id}}">{{$wrestler->name}}</a></li>
-            @endforeach   
+                <x-wrestler-card :wrestler="$wrestler" />
+            @endforeach
         </ul>
     </inner-column>
     

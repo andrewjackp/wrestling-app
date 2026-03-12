@@ -20,7 +20,7 @@
 
 		<button type="submit" class="btn btn--secondary">Update dashboard</button>
 		</form> --}}
-		
+
 		<div class="dashboard">			
 			<section class="promotions">
 				<h1 class='attention-voice'>PROMOTIONS</h1>
@@ -47,17 +47,13 @@
 			</section>
 
 			<section class="wrestlers">
-				<h1 class="attention-voice">RASSLERZ</h1>
-				<ul>
-            	@foreach($wrestlers as $wrestler)
-                	<li>
-                		<a href="/wrestler/{{$wrestler->id}}">
-                			{{$wrestler->name}}
-                		</a>
-                	</li>
-            	@endforeach   
-        		</ul>		
-			</section>			
+  				<h1 class="attention-voice">RASSLERZ</h1>
+  				<ul class="third-col-list">
+    				@foreach($wrestlers as $wrestler)
+      				<x-wrestler-card :wrestler="$wrestler" />
+    				@endforeach
+  				</ul>
+			</section>	
 		</div>
 	</inner-column>
 </x-layout>
