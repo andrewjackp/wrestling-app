@@ -7,6 +7,7 @@
 @php
   $href = $href ?? '#';
   $date = $date ?? '01/01/2026';
+  $title = $article->article_title ?? $article->title ?? 'Untitled';
 @endphp
 
 <li {{ $attributes->merge(['class' => 'article-list__item']) }}>
@@ -16,20 +17,17 @@
       <img
         class="article-card__image"
         src="{{ $article->image_url ?? 'https://peprojects.dev/images/landscape.jpg' }}"
-        alt="{{ $article->article_title }}"
+        alt="{{ $title }}"
       >
 
-    <div class="article-card__tag-overlay">
+      <div class="article-card__tag-overlay">
         <x-tag>News</x-tag>
-    </div>
-    
+      </div>
     </picture>
-
-
 
     <div class="article-card__content-wrap">
       <x-card.title class="article-card__title">
-        <a class="link" href="{{ $href }}">{{ $article->article_title }}</a>
+        <a class="link" href="{{ $href }}">{{ $title }}</a>
       </x-card.title>
 
       <div class="article-card__meta">
