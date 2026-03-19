@@ -108,28 +108,31 @@ class ProductionSeeder extends Seeder
     {
         $articles = [
             [
-                'title' => "{$promotionName} Weekly Rundown",
-                'content' => "A quick weekly recap for {$promotionName}.",
+            'title' => "{$promotionName} Weekly Rundown",
+            'content' => "A quick weekly recap for {$promotionName}.",
             ],
             [
-                'title' => "{$promotionName} Roster Spotlight",
-                'content' => "A spotlight on a few key names in {$promotionName}.",
+            'title' => "{$promotionName} Roster Spotlight",
+            'content' => "A spotlight on a few key names in {$promotionName}.",
             ],
-        ];  
+        ];
+
+        $columns = \Schema::getColumnListing('articles');
+        $titleColumn = in_array('article_title', $columns) ? 'article_title' : 'title';
 
         foreach ($articles as $a) {
             $exists = Article::query()
-            ->where('promotion_id', $promotionId)
-            ->where('article_title', $a['title'])
-            ->exists();
+                ->where('promotion_id', $promotionId)
+                ->where($titleColumn, $a['title'])
+                ->exists();
 
             if ($exists) {
                 continue;
-            }
+            }   
 
             $article = new Article();
             $article->forceFill([
-                'article_title' => $a['title'],
+                $titleColumn => $a['title'],
                 'content' => $a['content'],
                 'promotion_id' => $promotionId,
             ])->save();
