@@ -1,7 +1,5 @@
 @props([
-	'wrestler',
-	'name',
-	'promotion'
+	'wrestler'
 ])
 
 @php 
