@@ -95,6 +95,8 @@ Route::get('/dashboard', function (Request $request) {
     //always load all promotions    
     $promotions = Promotion::orderBy('name')->get();
 
+
+
     // filtered if promotions selected
     $articlesQuery = Article::latest()->take(3);
 
@@ -105,7 +107,7 @@ Route::get('/dashboard', function (Request $request) {
     $articles = $articlesQuery->get();
 
     //getting wrestlers if promotion is selected
-    $wrestlersQuery = Wrestler::latest()->take(20);
+    $wrestlersQuery = Wrestler::with('promotion')->orderBy('name');
 
     if (!empty($selectedPromotions)) {
         $wrestlersQuery->whereIn('promotion_id', $selectedPromotions);
