@@ -1,13 +1,10 @@
 <x-layout>
-   <ul>
-      <inner-column>
-            @foreach($bouts as $bout)
-            <li>
-               <a href="/bout/{{$bout->id}}">
-                  {{$bout->title}}
-               </a>
-            </li>    
-         @endforeach  
-      </inner-column>
-   </ul>      
+  <inner-column>
+    <h1>Bouts</h1>
+    <ul class="bout-list">
+      @foreach($bouts as $bout)
+        <x-bout-card :bout="$bout" />
+      @endforeach
+    </ul>
+  </inner-column>
 </x-layout>

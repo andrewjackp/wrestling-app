@@ -44,11 +44,12 @@
         {{ $article->content }}
       </p>
 
-      <div class="article-card__actions">
-        <x-button-link href="/article-detail/{{ $article->id }}">
-          Read More
-        </x-button-link>
-      </div>
+    </div>
+
+    <div class="article-card__actions">
+      <x-button-link href="/article-detail/{{ $article->id }}">
+        Read More
+      </x-button-link>
     </div>
 
   </x-card>

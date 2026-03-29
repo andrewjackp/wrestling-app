@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Wrestler;
 use App\Models\Bout;
 use App\Models\Promotion;
+use App\Models\Result;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\WrestlerController;
 
@@ -39,23 +40,29 @@ Route::get('/wrestler/{wrestler}', [WrestlerController::class, 'loadWrestler'])-
 
 Route::get('wrestler/{wrestler}/delete', [WrestlerController::class, 'deleteWrestler']);
 
+Route::get('/results', function() {
+    $results = Result::with(['bout', 'winner'])->get();
+
+    return view('results', [
+        'results' => $results,
+    ]);
+});
+
 Route::get('/bouts', function() {
 
-    $bouts = Bout::with('wrestlers')->get();
+    $bouts = Bout::with(['wrestlers', 'promotion', 'event'])->get();
     
     return view('bouts', [
         "bouts" => $bouts
     ]);
 });
 
-Route::get('/bout/{bout}', function(Bout $bout) {
-
-    $bout->load('promotion');
+Route::get('/bout/{bout}', function (Bout $bout) {
+    $bout->load(['promotion', 'wrestlers', 'result.winner', 'event']);
 
     return view('bout', [
-      'bout' => $bout
+        'bout' => $bout,
     ]);
-
 })->name('bout.show');
 
 Route::get('/promotions', function() {
@@ -67,13 +74,14 @@ Route::get('/promotions', function() {
     ]);
 });
 
-Route::get('/promotions/{promotion}',function (Promotion $promotion) {
-    $promotion->load(['wrestlers', 'articles']);
+
+Route::get('/promotion/{promotion}', function (Promotion $promotion) {
+    $promotion->load(['wrestlers', 'events', 'articles']);
 
     return view('promotion', [
-        "promotion" => $promotion
+        'promotion' => $promotion,
     ]);
-});
+})->name('promotion.show');
 
 // Route::get('/promotion/{id}', function(Promotion $id) {
 //     return view('promotion', [
@@ -122,4 +130,3 @@ Route::get('/dashboard', function (Request $request) {
         'wrestlers' => $wrestlers,
     ]);
 })->name('dashboard');
-

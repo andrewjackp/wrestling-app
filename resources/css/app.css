@@ -7,6 +7,8 @@
 @import "./components/buttons/style.css";
 @import "./components/article-card/style.css";
 @import "./components/wrestler-card/style.css";
+@import "./components/bout-card/style.css";
+@import "./components/result-card/style.css";
 @import "./components/dashboard-controls/style.css";
 
 @tailwind base;

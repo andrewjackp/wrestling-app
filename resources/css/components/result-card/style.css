@@ -1,0 +1,49 @@
+.result-list {
+  display: grid;
+  gap: 1.2em;
+}
+
+@media (width > 600px) {
+  .result-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (width > 1000px) {
+  .result-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.result-list__item {
+  list-style: none;
+}
+
+.result-card__title {
+  flex: 1;
+  min-width: 0;
+}
+
+.result-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4em;
+}
+
+.result-card__winner {
+  margin: 0;
+  font-size: 0.95rem;
+}
+
+.result-card__duration {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #475569;
+}
+
+.result-card__notes {
+  margin: 0;
+  font-size: 0.85rem;
+  color: #334155;
+  font-style: italic;
+}

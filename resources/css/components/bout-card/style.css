@@ -1,0 +1,57 @@
+.bout-list {
+  display: grid;
+  gap: 1.2em;
+}
+
+@media (width > 600px) {
+  .bout-list {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (width > 1000px) {
+  .bout-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.bout-list__item {
+  list-style: none;
+}
+
+.bout-card__title {
+  flex: 1;
+  min-width: 0;
+}
+
+.bout-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
+
+.bout-card__event {
+  font-size: 0.85rem;
+  color: #475569;
+  margin: 0;
+}
+
+.bout-card__wrestlers {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4em;
+}
+
+.bout-card__wrestler {
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.bout-card__wrestler:not(:last-child)::after {
+  content: ' vs.';
+  font-weight: 400;
+  color: #64748b;
+}

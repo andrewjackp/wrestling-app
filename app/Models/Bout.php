@@ -25,5 +25,16 @@ class Bout extends Model
       return $this->belongsTo(
          Promotion::class);
    }
-   
+
+   public function result()
+   {
+      return $this->hasOne(Result::class);
+      
+   }
+
+   public function event()
+   {
+      return $this->belongsTo(Event::class);
+   }
+
 }
