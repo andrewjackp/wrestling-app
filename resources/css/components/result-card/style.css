@@ -4,15 +4,11 @@
 }
 
 @media (width > 600px) {
-  .result-list {
-    grid-template-columns: 1fr 1fr;
-  }
+
 }
 
 @media (width > 1000px) {
-  .result-list {
-    grid-template-columns: repeat(3, 1fr);
-  }
+
 }
 
 .result-list__item {

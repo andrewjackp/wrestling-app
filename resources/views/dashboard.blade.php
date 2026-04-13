@@ -21,20 +21,14 @@
 		<button type="submit" class="btn btn--secondary">Update dashboard</button>
 		</form> --}}
 
-		<div class="dashboard">			
-			<section class="promotions">
-				<h1 class='attention-voice'>PROMOTIONS</h1>
-        		<ul>	
-           		@foreach($promotions as $promotion)
-     					@if(empty($selectedPromotions) || in_array($promotion->id, $selectedPromotions))
-        					<li>
-         					<a href="/promotions/{{ $promotion->id }}">
-            					{{ $promotion->name }}
-          					</a>
-        					</li>
-      				@endif
-            @endforeach   
-        		</ul> 			
+		<div class="dashboard">
+			<section class="events">
+				<h1 class='attention-voice'>EVENTS</h1>
+        		<ul class="event-list">
+           		@foreach($events as $event)
+        				<x-event-card :event="$event" />
+            	@endforeach
+        		</ul>
 			</section>
 
 			<section class="articles">
@@ -43,17 +37,17 @@
       			@foreach($articles as $article)
         				<x-article-card :article="$article" />
       			@endforeach
-    			</ul>			
+    			</ul>
 			</section>
 
-			<section class="wrestlers">
-  				<h1 class="attention-voice">RASSLERZ</h1>
-  				<ul class="third-col-list">
-    				@foreach($wrestlers as $wrestler)
-      				<x-wrestler-card :wrestler="$wrestler" />
+			<section class="results">
+  				<h1 class="attention-voice">RESULTS</h1>
+  				<ul class="result-list">
+    				@foreach($results as $result)
+      				<x-result-card :result="$result" />
     				@endforeach
   				</ul>
-			</section>	
+			</section>
 		</div>
 	</inner-column>
 </x-layout>

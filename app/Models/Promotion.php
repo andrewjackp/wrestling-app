@@ -28,4 +28,9 @@ class Promotion extends Model
     {
         return $this->hasMany(Event::class);
     }
+
+    public function bouts()
+    {
+        return $this->hasMany(Bout::class);
+    }
 }

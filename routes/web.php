@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Models\Wrestler;
 use App\Models\Bout;
 use App\Models\Promotion;
+use App\Models\Event;
 use App\Models\Result;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\WrestlerController;
@@ -65,6 +66,14 @@ Route::get('/bout/{bout}', function (Bout $bout) {
     ]);
 })->name('bout.show');
 
+Route::get('/event/{event}', function (Event $event) {
+    $event->load(['promotion', 'bouts.result.winner', 'bouts.wrestlers']);
+
+    return view('event', [
+        'event' => $event,
+    ]);
+})->name('event.show');
+
 Route::get('/promotions', function() {
 
     $promotions = Promotion::with('wrestlers')->get();
@@ -76,7 +85,7 @@ Route::get('/promotions', function() {
 
 
 Route::get('/promotion/{promotion}', function (Promotion $promotion) {
-    $promotion->load(['wrestlers', 'events', 'articles']);
+    $promotion->load(['wrestlers', 'events', 'articles', 'bouts.result.winner']);
 
     return view('promotion', [
         'promotion' => $promotion,
@@ -100,11 +109,6 @@ Route::get('/dashboard', function (Request $request) {
         ->values()
         ->all();
 
-    //always load all promotions    
-    $promotions = Promotion::orderBy('name')->get();
-
-
-
     // filtered if promotions selected
     $articlesQuery = Article::latest()->take(3);
 
@@ -114,19 +118,27 @@ Route::get('/dashboard', function (Request $request) {
 
     $articles = $articlesQuery->get();
 
-    //getting wrestlers if promotion is selected
-    $wrestlersQuery = Wrestler::with('promotion')->orderBy('name');
+    $eventsQuery = Event::with('promotion')->orderBy('event_date', 'desc');
 
     if (!empty($selectedPromotions)) {
-        $wrestlersQuery->whereIn('promotion_id', $selectedPromotions);
+        $eventsQuery->whereIn('promotion_id', $selectedPromotions);
     }
 
-    $wrestlers = $wrestlersQuery->get();
+    $events = $eventsQuery->get();
+
+    $resultsQuery = Result::with(['bout.promotion', 'winner'])
+        ->whereHas('bout', function ($q) use ($selectedPromotions) {
+            if (!empty($selectedPromotions)) {
+                $q->whereIn('promotion_id', $selectedPromotions);
+            }
+        });
+
+    $results = $resultsQuery->latest()->take(10)->get();
 
     return view('dashboard', [
-        'promotions' => $promotions,
         'selectedPromotions' => $selectedPromotions,
         'articles' => $articles,
-        'wrestlers' => $wrestlers,
+        'events' => $events,
+        'results' => $results,
     ]);
 })->name('dashboard');
