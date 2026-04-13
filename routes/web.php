@@ -110,7 +110,7 @@ Route::get('/dashboard', function (Request $request) {
         ->all();
 
     // filtered if promotions selected
-    $articlesQuery = Article::latest()->take(3);
+    $articlesQuery = Article::latest()->take(9);
 
     if (!empty($selectedPromotions)) {
         $articlesQuery->whereIn('promotion_id', $selectedPromotions);

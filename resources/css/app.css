@@ -64,15 +64,11 @@ inner-column {
  			overflow: hidden;
 		}
 	}
-
-/*	@media (width > 800px) {
-		grid-template-columns: 1fr 2fr 1fr;
-
-		.articles {
-			grid-row: 1;
-			grid-column: 2;
-		}
-	}*/
+	@media (width < 600px) {
+  		.articles {
+    		grid-row: 1;
+  		}
+	}
 }
 
 
