@@ -75,27 +75,56 @@ class ProductionSeeder extends Seeder
 
         $bouts = [
             'WWE' => [
-                ['title' => 'Royal Rumble Match (Men\'s)',   'event' => 'Royal Rumble 2025',   'winner' => 'Cody Rhodes',       'finish_type' => 'Last Elimination', 'duration' => '58:24'],
-                ['title' => 'Undisputed WWE Championship',   'event' => 'WrestleMania 41',      'winner' => 'Cody Rhodes',       'finish_type' => 'Pinfall',          'duration' => '22:11'],
-                ['title' => 'World Heavyweight Championship','event' => 'WrestleMania 41',      'winner' => 'Seth FREAKIN Rollins','finish_type' => 'Pinfall',         'duration' => '18:45'],
-                ['title' => 'Women\'s World Championship',  'event' => 'SummerSlam 2025',      'winner' => 'Rhea Ripley',       'finish_type' => 'Submission',       'duration' => '14:32'],
+                // Royal Rumble 2025
+                ['title' => 'Undisputed WWE Championship',        'event' => 'Royal Rumble 2025',    'winner' => 'Roman Reigns',          'opponent' => 'Cody Rhodes',         'finish_type' => 'Pinfall',          'duration' => '28:14', 'notes' => 'Roman retained after outside interference.'],
+                ['title' => 'Royal Rumble Match (Men\'s)',        'event' => 'Royal Rumble 2025',    'winner' => 'Cody Rhodes',           'opponent' => 'Seth FREAKIN Rollins', 'finish_type' => 'Last Elimination', 'duration' => '58:24', 'notes' => 'Cody eliminated Rollins last to earn his WrestleMania shot.'],
+                ['title' => 'World Heavyweight Championship',     'event' => 'Royal Rumble 2025',    'winner' => 'Seth FREAKIN Rollins',  'opponent' => 'Roman Reigns',        'finish_type' => 'Pinfall',          'duration' => '19:02'],
+                // WrestleMania 41
+                ['title' => 'Undisputed WWE Championship',        'event' => 'WrestleMania 41',      'winner' => 'Cody Rhodes',           'opponent' => 'Roman Reigns',        'finish_type' => 'Pinfall',          'duration' => '22:11', 'notes' => 'Cody finally finishes his story.'],
+                ['title' => 'World Heavyweight Championship',     'event' => 'WrestleMania 41',      'winner' => 'Seth FREAKIN Rollins',  'opponent' => 'Becky Lynch',         'finish_type' => 'Pinfall',          'duration' => '18:45'],
+                ['title' => 'Women\'s World Championship',        'event' => 'WrestleMania 41',      'winner' => 'Rhea Ripley',           'opponent' => 'Becky Lynch',         'finish_type' => 'Submission',       'duration' => '16:30'],
+                // SummerSlam 2025
+                ['title' => 'Undisputed WWE Championship',        'event' => 'SummerSlam 2025',      'winner' => 'Cody Rhodes',           'opponent' => 'Seth FREAKIN Rollins', 'finish_type' => 'Pinfall',         'duration' => '24:50'],
+                ['title' => 'Women\'s World Championship',        'event' => 'SummerSlam 2025',      'winner' => 'Rhea Ripley',           'opponent' => 'Becky Lynch',         'finish_type' => 'Submission',       'duration' => '14:32'],
+                ['title' => 'Singles Match',                      'event' => 'SummerSlam 2025',      'winner' => 'Roman Reigns',          'opponent' => 'Seth FREAKIN Rollins', 'finish_type' => 'Pinfall',         'duration' => '20:17', 'notes' => 'Roman\'s return match after months away.'],
             ],
             'AEW' => [
-                ['title' => 'AEW World Championship',        'event' => 'Dynasty 2025',         'winner' => 'Jon Moxley',        'finish_type' => 'Pinfall',          'duration' => '24:08'],
-                ['title' => 'AEW World Championship',        'event' => 'Double or Nothing 2025','winner' => 'Swerve Strickland','finish_type' => 'Pinfall',          'duration' => '31:17'],
-                ['title' => 'Owen Hart Cup Final',           'event' => 'Double or Nothing 2025','winner' => 'Bryan Danielson',  'finish_type' => 'Submission',       'duration' => '19:44'],
-                ['title' => 'AEW World Championship',        'event' => 'All In London 2025',   'winner' => 'MJF',               'finish_type' => 'Pinfall',          'duration' => '27:52'],
+                // Dynasty 2025
+                ['title' => 'AEW World Championship',             'event' => 'Dynasty 2025',         'winner' => 'Jon Moxley',            'opponent' => 'Hangman Adam Page',   'finish_type' => 'Pinfall',          'duration' => '24:08'],
+                ['title' => 'Singles Match',                      'event' => 'Dynasty 2025',         'winner' => 'Kenny Omega',           'opponent' => 'MJF',                 'finish_type' => 'Pinfall',          'duration' => '31:55', 'notes' => 'Long-awaited rematch between former best friends.'],
+                ['title' => 'Singles Match',                      'event' => 'Dynasty 2025',         'winner' => 'Swerve Strickland',     'opponent' => 'Bryan Danielson',     'finish_type' => 'Pinfall',          'duration' => '18:22'],
+                // Double or Nothing 2025
+                ['title' => 'AEW World Championship',             'event' => 'Double or Nothing 2025','winner' => 'Swerve Strickland',    'opponent' => 'Jon Moxley',          'finish_type' => 'Pinfall',          'duration' => '31:17'],
+                ['title' => 'Owen Hart Cup Final',                'event' => 'Double or Nothing 2025','winner' => 'Bryan Danielson',      'opponent' => 'Kenny Omega',         'finish_type' => 'Submission',       'duration' => '19:44'],
+                ['title' => 'Singles Match',                      'event' => 'Double or Nothing 2025','winner' => 'Toni Storm',           'opponent' => 'Swerve Strickland',   'finish_type' => 'DQ',               'duration' => '09:11'],
+                // All In London 2025
+                ['title' => 'AEW World Championship',             'event' => 'All In London 2025',   'winner' => 'MJF',                   'opponent' => 'Swerve Strickland',   'finish_type' => 'Pinfall',          'duration' => '27:52', 'notes' => 'MJF wins the title in front of 90,000 fans at Wembley.'],
+                ['title' => 'Singles Match',                      'event' => 'All In London 2025',   'winner' => 'Kenny Omega',           'opponent' => 'Jon Moxley',          'finish_type' => 'Pinfall',          'duration' => '22:37'],
+                ['title' => 'Singles Match',                      'event' => 'All In London 2025',   'winner' => 'Hangman Adam Page',     'opponent' => 'Bryan Danielson',     'finish_type' => 'Pinfall',          'duration' => '17:09'],
             ],
             'NJPW' => [
-                ['title' => 'IWGP World Heavyweight Championship','event'=>'Wrestle Kingdom 19','winner' => 'Zack Sabre, Jr.',   'finish_type' => 'Submission',       'duration' => '26:33'],
-                ['title' => 'NEVER Openweight Championship', 'event' => 'Wrestle Kingdom 19',  'winner' => 'Hirooki Goto',      'finish_type' => 'Pinfall',          'duration' => '15:20'],
-                ['title' => 'IWGP Junior Heavyweight Championship','event'=>'New Beginning 2025','winner'=>'Yota Tsuji',         'finish_type' => 'Pinfall',          'duration' => '21:05'],
-                ['title' => 'G1 Climax 35 Final',           'event' => 'G1 Climax 35',         'winner' => 'Aaron Wolf',        'finish_type' => 'Pinfall',          'duration' => '34:18'],
+                // Wrestle Kingdom 19
+                ['title' => 'IWGP World Heavyweight Championship','event' => 'Wrestle Kingdom 19',   'winner' => 'Zack Sabre, Jr.',       'opponent' => 'Hirooki Goto',        'finish_type' => 'Submission',       'duration' => '26:33'],
+                ['title' => 'NEVER Openweight Championship',      'event' => 'Wrestle Kingdom 19',   'winner' => 'Hirooki Goto',          'opponent' => 'Toru Yano',           'finish_type' => 'Pinfall',          'duration' => '15:20'],
+                ['title' => 'Singles Match',                      'event' => 'Wrestle Kingdom 19',   'winner' => 'Yota Tsuji',            'opponent' => 'Aaron Wolf',          'finish_type' => 'Pinfall',          'duration' => '18:44', 'notes' => 'A hard-hitting breakout performance from Tsuji.'],
+                // New Beginning 2025
+                ['title' => 'IWGP World Heavyweight Championship','event' => 'New Beginning 2025',   'winner' => 'Zack Sabre, Jr.',       'opponent' => 'Yota Tsuji',          'finish_type' => 'Submission',       'duration' => '23:58', 'notes' => 'ZSJ submitted Tsuji with a new hold he debuted on this night.'],
+                ['title' => 'IWGP Junior Heavyweight Championship','event'=> 'New Beginning 2025',   'winner' => 'Yota Tsuji',            'opponent' => 'Aaron Wolf',          'finish_type' => 'Pinfall',          'duration' => '21:05'],
+                ['title' => 'Singles Match',                      'event' => 'New Beginning 2025',   'winner' => 'Toru Yano',             'opponent' => 'Hirooki Goto',        'finish_type' => 'Rollup',           'duration' => '04:22', 'notes' => 'Yano steals the win with his trademark rollup.'],
+                // G1 Climax 35
+                ['title' => 'G1 Climax 35 Final',                 'event' => 'G1 Climax 35',         'winner' => 'Aaron Wolf',            'opponent' => 'Zack Sabre, Jr.',     'finish_type' => 'Pinfall',          'duration' => '34:18', 'notes' => 'Wolf ends ZSJ\'s dominant run in a match of the year candidate.'],
+                ['title' => 'G1 Climax 35 Block A Final',         'event' => 'G1 Climax 35',         'winner' => 'Zack Sabre, Jr.',       'opponent' => 'Hirooki Goto',        'finish_type' => 'Submission',       'duration' => '19:01'],
+                ['title' => 'G1 Climax 35 Block B Final',         'event' => 'G1 Climax 35',         'winner' => 'Aaron Wolf',            'opponent' => 'Yota Tsuji',          'finish_type' => 'Pinfall',          'duration' => '22:44'],
             ],
             'CMLL' => [
-                ['title' => 'NWA Historic Middleweight Championship','event'=>'Homenaje a Dos Leyendas 2025','winner'=>'Soberano Jr.','finish_type'=>'Pinfall','duration'=>'18:42'],
-                ['title' => 'CMLL World Heavyweight Championship','event'=>'CMLL Anniversary 2025','winner'=>'Ultimo Guerrero',  'finish_type' => 'Pinfall',          'duration' => '22:10'],
-                ['title' => 'CMLL World Light Heavyweight Championship','event'=>'CMLL Anniversary 2025','winner'=>'Atlantis Jr.','finish_type'=>'Pinfall',           'duration' => '19:55'],
+                // Homenaje a Dos Leyendas 2025
+                ['title' => 'NWA Historic Middleweight Championship',       'event' => 'Homenaje a Dos Leyendas 2025', 'winner' => 'Soberano Jr.',   'opponent' => 'Mistico',         'finish_type' => 'Pinfall',    'duration' => '18:42'],
+                ['title' => 'Lucha de Apuestas (Mask vs. Mask)',            'event' => 'Homenaje a Dos Leyendas 2025', 'winner' => 'Atlantis Jr.',   'opponent' => 'Blue Panther',    'finish_type' => 'Pinfall',    'duration' => '24:10', 'notes' => 'Blue Panther unmasked in an emotional moment.'],
+                ['title' => 'Trios Match',                                   'event' => 'Homenaje a Dos Leyendas 2025', 'winner' => 'Ultimo Guerrero','opponent' => 'Soberano Jr.',    'finish_type' => 'Pinfall',    'duration' => '14:55'],
+                // CMLL Anniversary 2025
+                ['title' => 'CMLL World Heavyweight Championship',          'event' => 'CMLL Anniversary 2025',        'winner' => 'Ultimo Guerrero','opponent' => 'Atlantis Jr.',    'finish_type' => 'Pinfall',    'duration' => '22:10'],
+                ['title' => 'CMLL World Light Heavyweight Championship',    'event' => 'CMLL Anniversary 2025',        'winner' => 'Atlantis Jr.',   'opponent' => 'Blue Panther',    'finish_type' => 'Pinfall',    'duration' => '19:55'],
+                ['title' => 'Singles Match',                                 'event' => 'CMLL Anniversary 2025',        'winner' => 'Mistico',        'opponent' => 'Soberano Jr.',    'finish_type' => 'Pinfall',    'duration' => '16:30', 'notes' => 'A high-flying classic between two of CMLL\'s best.'],
             ],
         ];
 
@@ -210,24 +239,31 @@ class ProductionSeeder extends Seeder
                 'event_id'     => $event->id,
             ])->save();
 
-            // Attach the winner as a participant
             $winner = Wrestler::query()
                 ->where('name', $data['winner'])
                 ->where('promotion_id', $promotionId)
                 ->first();
 
-            if ($winner) {
-                BoutWrestler::firstOrCreate([
-                    'bout_id'    => $bout->id,
-                    'wrestler_id'=> $winner->id,
-                ]);
+            $opponent = Wrestler::query()
+                ->where('name', $data['opponent'])
+                ->where('promotion_id', $promotionId)
+                ->first();
 
+            foreach (array_filter([$winner, $opponent]) as $participant) {
+                BoutWrestler::firstOrCreate([
+                    'bout_id'     => $bout->id,
+                    'wrestler_id' => $participant->id,
+                ]);
+            }
+
+            if ($winner) {
                 $result = new Result();
                 $result->forceFill([
                     'bout_id'     => $bout->id,
                     'winner_id'   => $winner->id,
                     'finish_type' => $data['finish_type'],
                     'duration'    => $data['duration'],
+                    'notes'       => $data['notes'] ?? null,
                 ])->save();
             }
         }
