@@ -8,8 +8,26 @@
   padding: var(--standard-padding);
 
   select {
-    width: 100%;
-  }
+  /* 1. Remove native Safari styling */
+    -webkit-appearance: none;
+    appearance: none;
+    
+    /* 2. Fix inconsistent border-radius on iOS */
+    border-radius: 0;
+    
+    /* 3. Add custom padding and styling */
+    padding: 10px;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+}
+
+
+
+/* 4. Fix fieldset rendering issues */
+fieldset {
+  box-sizing: border-box;
+  /* Ensure padding doesn't push out the layout */
 }
 
 
