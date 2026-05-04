@@ -1,7 +1,7 @@
 .wrestler-card {
 	height: auto;
 	border-radius: 0.8em;
-
+	list-style-type: none;
 	.card_footer {
 		margin-top: auto;
 	}
@@ -29,3 +29,7 @@
   object-position: center top;
 }
 
+.wrestler-card.no-border {
+	border: none;
+	box-shadow: none;
+}

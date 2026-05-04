@@ -10,7 +10,7 @@
 	<x-card.header>
 		<div class="wrestler-card-heading">
 			<x-card.title class="wrestler-card-title">
-				{{ $wrestler->name }}
+				<a href="{{ route('wrestler.show', $wrestler) }}">{{ $wrestler->name }}</a>
 			</x-card.title>
 		</div>
 	</x-card.header>
