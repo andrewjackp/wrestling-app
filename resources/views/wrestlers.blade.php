@@ -1,6 +1,5 @@
 <x-layout>
     <inner-column>
-        <h1>{{formatCode($wrestlers)}}</h1>
 
             @if (Session::has('success'))
                 <span>{{Session::get('success')}}</span>
