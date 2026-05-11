@@ -12,7 +12,7 @@
 .btn--primary {
 /*  background: var(--black);
   color: var(--white);*/
-  color: var(--lightblue);
+  color: var(--blue-brand);
 }
 .btn--primary:hover {
   opacity: 0.9;
