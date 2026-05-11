@@ -31,13 +31,16 @@
         		</ul>
 			</section>
 
-			<section class="articles">
+			<section class="articles" x-data="{ expanded: false }" :class="{ 'articles--expanded': expanded }">
 				<h1 class="attention-voice">Featured Articles</h1>
-    			<ul class='article-list'>
-      			@foreach($articles as $article)
-        				<x-article-card :article="$article" />
-      			@endforeach
-    			</ul>
+				<ul class='article-list'>
+					@foreach($articles as $article)
+						<x-article-card :article="$article" />
+					@endforeach
+				</ul>
+				<button class="load-more-btn" @click="expanded = true" x-show="!expanded">
+					Load More
+				</button>
 			</section>
 
 			<section class="results">

@@ -1,4 +1,8 @@
 import './bootstrap';
+import Alpine from 'alpinejs';
+
+window.Alpine = Alpine;
+Alpine.start();
 
 document.querySelectorAll('.nav-dropdown').forEach(dropdown => {
   const trigger = dropdown.querySelector('.nav-link');

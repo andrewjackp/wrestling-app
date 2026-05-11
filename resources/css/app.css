@@ -54,6 +54,10 @@ inner-column {
 		grid-row: 1;
 	}
 
+	.load-more-btn {
+		display: none;
+	}
+
 	.article-list {
 /*		grid-template-columns: 1fr;*/
 
@@ -68,6 +72,15 @@ inner-column {
   		.articles {
     		grid-row: 1;
   		}
+
+		.articles:not(.articles--expanded) .article-list .article-list__item:not(:first-child) {
+			display: none;
+		}
+
+		.load-more-btn {
+			display: block;
+			margin-top: 1em;
+		}
 	}
 }
 
