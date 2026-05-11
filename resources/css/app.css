@@ -40,6 +40,11 @@ inner-column {
    padding: 20px;
    max-width: 1400px;
    margin-inline: auto;
+
+   @media (width < 600px) {
+   	padding: 0;
+   }
+
 }
 
 .dashboard {
@@ -69,11 +74,20 @@ inner-column {
 		}
 	}
 	@media (width < 600px) {
+
   		.articles {
     		grid-row: 1;
   		}
 
 		.articles:not(.articles--expanded) .article-list .article-list__item:not(:first-child) {
+			display: none;
+		}
+
+		.events:not(.events--expanded) .event-list .event-card:not(:first-of-type) {
+			display: none;
+		}
+
+		.results:not(.results--expanded) .result-list .result-list__item:not(:first-child) {
 			display: none;
 		}
 

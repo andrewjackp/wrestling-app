@@ -22,13 +22,16 @@
 		</form> --}}
 
 		<div class="dashboard">
-			<section class="events">
+			<section class="events" x-data="{ expanded: false }" :class="{ 'events--expanded': expanded }">
 				<h1 class='attention-voice'>EVENTS</h1>
         		<ul class="event-list">
            		@foreach($events as $event)
         				<x-event-card :event="$event" />
             	@endforeach
         		</ul>
+				<button class="load-more-btn" @click="expanded = !expanded">
+					<span x-text="expanded ? 'Show Less' : 'Load More'"></span>
+				</button>
 			</section>
 
 			<section class="articles" x-data="{ expanded: false }" :class="{ 'articles--expanded': expanded }">
@@ -43,13 +46,16 @@
 				</button>
 			</section>
 
-			<section class="results">
+			<section class="results" x-data="{ expanded: false }" :class="{ 'results--expanded': expanded }">
   				<h1 class="attention-voice">RESULTS</h1>
   				<ul class="result-list">
     				@foreach($results as $result)
       				<x-result-card :result="$result" />
     				@endforeach
   				</ul>
+				<button class="load-more-btn" @click="expanded = !expanded">
+					<span x-text="expanded ? 'Show Less' : 'Load More'"></span>
+				</button>
 			</section>
 		</div>
 	</inner-column>
