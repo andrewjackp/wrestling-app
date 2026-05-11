@@ -38,8 +38,8 @@
 						<x-article-card :article="$article" />
 					@endforeach
 				</ul>
-				<button class="load-more-btn" @click="expanded = true" x-show="!expanded">
-					Load More
+				<button class="load-more-btn" @click="expanded = !expanded">
+					<span x-text="expanded ? 'Show Less' : 'Load More'"></span>
 				</button>
 			</section>
 
