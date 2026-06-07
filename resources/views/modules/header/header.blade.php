@@ -36,7 +36,7 @@
                      </fieldset>
 
                      <button type="submit" class="btn btn--secondary">
-                     Update dashboard
+                     Update
                      </button>
 
                   </form>
