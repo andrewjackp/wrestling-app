@@ -8,3 +8,14 @@ if (!function_exists('formatCode')) {
         return new HtmlString("<pre><code>{$string}</code></pre>");
     }
 }
+
+if (!function_exists('selectedPromotions')) {
+    function selectedPromotions(): array
+    {
+        return collect(request()->input('promotions', []))
+            ->filter()
+            ->map(fn ($id) => (int) $id)
+            ->values()
+            ->all();
+    }
+}

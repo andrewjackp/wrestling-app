@@ -19,7 +19,7 @@
 
                   <div class="dropdown-panel">
 
-                     <form method="GET" action="{{ route('dashboard') }}" class="dashboard-controls">
+                     <form method="GET" action="{{ url()->current() }}" class="dashboard-controls">
 
                       <fieldset>
                         

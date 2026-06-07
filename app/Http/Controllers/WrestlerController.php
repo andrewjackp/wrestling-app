@@ -11,8 +11,16 @@ use Illuminate\Support\Facades\Validator;
 class WrestlerController extends Controller
 {
     public function getWrestlers() {
-            return view ('wrestlers', [
-            "wrestlers" => Wrestler::all()->sortBy('name')
+        $selectedPromotions = selectedPromotions();
+
+        $query = Wrestler::with('promotion')->orderBy('name');
+
+        if (!empty($selectedPromotions)) {
+            $query->whereIn('promotion_id', $selectedPromotions);
+        }
+
+        return view('wrestlers', [
+            'wrestlers' => $query->get(),
         ]);
     }
    

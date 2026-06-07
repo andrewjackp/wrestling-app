@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 use App\Models\Article;
 use App\Models\Wrestler;
 use App\Models\Bout;
@@ -16,8 +15,16 @@ Route::get('/', function () {
 });
 
 Route::get('/articles', function() {
+    $selectedPromotions = selectedPromotions();
+
+    $query = Article::query();
+
+    if (!empty($selectedPromotions)) {
+        $query->whereIn('promotion_id', $selectedPromotions);
+    }
+
     return view('articles', [
-        "articles" => Article::all()
+        'articles' => $query->get(),
     ]);
 });
 
@@ -42,19 +49,30 @@ Route::get('/wrestler/{wrestler}', [WrestlerController::class, 'loadWrestler'])-
 Route::get('wrestler/{wrestler}/delete', [WrestlerController::class, 'deleteWrestler']);
 
 Route::get('/results', function() {
-    $results = Result::with(['bout', 'winner'])->get();
+    $selectedPromotions = selectedPromotions();
+
+    $query = Result::with(['bout.promotion', 'winner']);
+
+    if (!empty($selectedPromotions)) {
+        $query->whereHas('bout', fn ($q) => $q->whereIn('promotion_id', $selectedPromotions));
+    }
 
     return view('results', [
-        'results' => $results,
+        'results' => $query->get(),
     ]);
 });
 
 Route::get('/bouts', function() {
+    $selectedPromotions = selectedPromotions();
 
-    $bouts = Bout::with(['wrestlers', 'promotion', 'event'])->get();
-    
+    $query = Bout::with(['wrestlers', 'promotion', 'event']);
+
+    if (!empty($selectedPromotions)) {
+        $query->whereIn('promotion_id', $selectedPromotions);
+    }
+
     return view('bouts', [
-        "bouts" => $bouts
+        'bouts' => $query->get(),
     ]);
 });
 
@@ -102,12 +120,8 @@ Route::get('/promotion/{promotion}', function (Promotion $promotion) {
 Route::get('/post/create', [PostController::class, 'create']);
 Route::post('/post', [PostController::class, 'store']);
 
-Route::get('/dashboard', function (Request $request) {
-    $selectedPromotions = collect($request->input('promotions', []))
-        ->filter()
-        ->map(fn ($id) => (int) $id)
-        ->values()
-        ->all();
+Route::get('/dashboard', function () {
+    $selectedPromotions = selectedPromotions();
 
     // filtered if promotions selected
     $articlesQuery = Article::latest()->take(9);
