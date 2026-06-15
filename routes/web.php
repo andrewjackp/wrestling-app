@@ -11,7 +11,31 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\WrestlerController;
 
 Route::get('/', function () {
-    return view('welcome');
+    $selectedPromotions = selectedPromotions();
+
+    $articlesQuery = Article::latest()->take(9);
+    if (!empty($selectedPromotions)) {
+        $articlesQuery->whereIn('promotion_id', $selectedPromotions);
+    }
+
+    $eventsQuery = Event::with('promotion')->orderBy('event_date', 'desc');
+    if (!empty($selectedPromotions)) {
+        $eventsQuery->whereIn('promotion_id', $selectedPromotions);
+    }
+
+    $resultsQuery = Result::with(['bout.promotion', 'winner'])
+        ->whereHas('bout', function ($q) use ($selectedPromotions) {
+            if (!empty($selectedPromotions)) {
+                $q->whereIn('promotion_id', $selectedPromotions);
+            }
+        });
+
+    return view('dashboard', [
+        'selectedPromotions' => $selectedPromotions,
+        'articles' => $articlesQuery->get(),
+        'events'  => $eventsQuery->get(),
+        'results' => $resultsQuery->latest()->take(10)->get(),
+    ]);
 });
 
 Route::get('/articles', function() {

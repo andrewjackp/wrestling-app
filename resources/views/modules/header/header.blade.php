@@ -8,11 +8,11 @@
       <inner-column>
          <nav>
             <ul>
-               <li><a href="/">Home</a></li>
-               <li><a href="/dashboard">Dashboard</a></li>
-               <li><a href="/articles">Articles</a></li>
-               <li><a href="/wrestlers">Wrestlers</a></li>
-               <li><a href="/bouts">Matches</a></li>
+               <li><a href="/{{ promotionQuery() }}">Home</a></li>
+               <li><a href="/dashboard{{ promotionQuery() }}">Dashboard</a></li>
+               <li><a href="/articles{{ promotionQuery() }}">Articles</a></li>
+               <li><a href="/wrestlers{{ promotionQuery() }}">Wrestlers</a></li>
+               <li><a href="/bouts{{ promotionQuery() }}">Matches</a></li>
                
                <li class="nav-item nav-dropdown">
                   <span class="nav-link">Promotions ▾</span>

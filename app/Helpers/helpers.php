@@ -19,3 +19,11 @@ if (!function_exists('selectedPromotions')) {
             ->all();
     }
 }
+
+if (!function_exists('promotionQuery')) {
+    function promotionQuery(): string
+    {
+        $selected = selectedPromotions();
+        return $selected ? '?' . http_build_query(['promotions' => $selected]) : '';
+    }
+}
