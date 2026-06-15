@@ -9,7 +9,7 @@
          <nav>
             <ul>
                <li><a href="/{{ promotionQuery() }}">Home</a></li>
-               <li><a href="/dashboard{{ promotionQuery() }}">Dashboard</a></li>
+               {{-- <li><a href="/dashboard{{ promotionQuery() }}">Dashboard</a></li> --}}
                <li><a href="/articles{{ promotionQuery() }}">Articles</a></li>
                <li><a href="/wrestlers{{ promotionQuery() }}">Wrestlers</a></li>
                <li><a href="/bouts{{ promotionQuery() }}">Matches</a></li>
