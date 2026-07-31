@@ -21,10 +21,16 @@
 
                      <form method="GET" action="{{ url()->current() }}" class="dashboard-controls">
 
-                      <fieldset>
-                        
-                        <legend>Filter Promotions</legend>
-                           <select name="promotions[]" multiple size="6">
+                      <a
+                           href="{{ url(request()->path()) }}"
+                           class="dropdown-all-link {{ empty($selectedPromotions ?? []) ? 'dropdown-all-link--active' : '' }}"
+                        >
+                           All Promotions
+                        </a>
+
+                        <fieldset>
+                           <legend>Filter by Promotion</legend>
+                           <select name="promotions[]" multiple size="{{ $promotions->count() }}">
                               @foreach($promotions as $promotion)
                                  <option
                                     value="{{ $promotion->id }}"
@@ -33,11 +39,11 @@
                                  </option>
                               @endforeach
                            </select>
-                     </fieldset>
+                        </fieldset>
 
-                     <button type="submit" class="btn btn--secondary">
-                     Update
-                     </button>
+                        <button type="submit" class="btn btn--secondary">
+                           Update
+                        </button>
 
                   </form>
 
