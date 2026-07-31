@@ -12,3 +12,8 @@
   background: var(--lightgreen);
   color: var(--green);
 }
+
+.tag--danger {
+  background: #fff5f5;
+  color: var(--red);
+}

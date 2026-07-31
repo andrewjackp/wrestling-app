@@ -1,16 +1,22 @@
 <x-layout>
     <inner-column>
+        <div class="page-header">
+            <h1 class="attention-voice">Wrestlers</h1>
+            <a class="btn btn--secondary" href="/add/wrestler">Add Wrestler</a>
+        </div>
 
-            @if (Session::has('success'))
-                <span>{{Session::get('success')}}</span>
-            @endif
+        @if(session('success'))
+            <p class="article-form__success">{{ session('success') }}</p>
+        @endif
 
-    <h1 class='attention-voice'><a href="add/wrestler">Add Wrestlers</a></h1>
         <ul class="wrestler-list">
             @foreach($wrestlers as $wrestler)
                 <x-wrestler-card :wrestler="$wrestler" />
             @endforeach
         </ul>
+
+        <div class="pagination-wrap">
+            {{ $wrestlers->links() }}
+        </div>
     </inner-column>
-    
 </x-layout>

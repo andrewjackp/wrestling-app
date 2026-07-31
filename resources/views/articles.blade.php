@@ -16,5 +16,9 @@
         <x-article-card :article="$article" />
       @endforeach
     </ul>
+
+    <div class="pagination-wrap">
+      {{ $articles->links() }}
+    </div>
   </inner-column>
 </x-layout>

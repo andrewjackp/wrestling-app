@@ -42,14 +42,14 @@ Route::get('/', function () {
 Route::get('/articles', function() {
     $selectedPromotions = selectedPromotions();
 
-    $query = Article::query();
+    $query = Article::latest();
 
     if (!empty($selectedPromotions)) {
         $query->whereIn('promotion_id', $selectedPromotions);
     }
 
     return view('articles', [
-        'articles' => $query->get(),
+        'articles' => $query->paginate(12)->withQueryString(),
     ]);
 });
 
@@ -83,7 +83,7 @@ Route::get('/results', function() {
     }
 
     return view('results', [
-        'results' => $query->get(),
+        'results' => $query->latest()->paginate(20)->withQueryString(),
     ]);
 });
 
@@ -97,7 +97,7 @@ Route::get('/bouts', function() {
     }
 
     return view('bouts', [
-        'bouts' => $query->get(),
+        'bouts' => $query->latest()->paginate(20)->withQueryString(),
     ]);
 });
 
@@ -118,17 +118,16 @@ Route::get('/event/{event}', function (Event $event) {
 })->name('event.show');
 
 Route::get('/promotions', function() {
-
-    $promotions = Promotion::with('wrestlers')->get();
+    $promotions = Promotion::withCount(['wrestlers', 'championships'])->with('championships')->get();
 
     return view('promotions', [
-        "promotions" => $promotions
+        'promotions' => $promotions,
     ]);
 });
 
 
 Route::get('/promotion/{promotion}', function (Promotion $promotion) {
-    $promotion->load(['wrestlers', 'events', 'articles', 'bouts.result.winner']);
+    $promotion->load(['wrestlers', 'events', 'articles', 'bouts.result.winner', 'championships.holder']);
 
     return view('promotion', [
         'promotion' => $promotion,

@@ -12,6 +12,7 @@ class Event extends Model
     protected $fillable = [
         'promotion_id',
         'name',
+        'image',
         'event_date',
         'venue',
         'city',

@@ -11,8 +11,10 @@
     @include('modules.header.header')
 
     <main>
-       {{$slot}}   
+       {{$slot}}
     </main>
+
+    @include('modules.footer.footer')
 
 </body>
 </html>

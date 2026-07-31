@@ -20,7 +20,7 @@ class WrestlerController extends Controller
         }
 
         return view('wrestlers', [
-            'wrestlers' => $query->get(),
+            'wrestlers' => $query->paginate(24)->withQueryString(),
         ]);
     }
    
@@ -44,28 +44,23 @@ class WrestlerController extends Controller
     public function addWrestler(Request $request): RedirectResponse {
 
         $request->validate([
-
-            'name' => 'required|string',
-            'promotion_id' => 'nullable|string'
-
+            'name'         => 'required|string',
+            'promotion_id' => 'nullable|exists:promotions,id',
+            'image'        => 'nullable|url',
+            'hometown'     => 'nullable|string|max:255',
+            'height'       => 'nullable|string|max:50',
+            'weight'       => 'nullable|string|max:50',
+            'bio'          => 'nullable|string',
         ]);
-        
+
         try {
-            $new_wrestler = new Wrestler;
-            $new_wrestler->load('promotion');
-            $new_wrestler->name = $request->name;
-            $new_wrestler->promotion_id = $request->promotion_id;
-            $new_wrestler->save();   
+            Wrestler::create($request->only(['name', 'promotion_id', 'image', 'hometown', 'height', 'weight', 'bio']));
 
-            return redirect('/wrestlers')->with('success', 'wrestler added');
-            
-            } 
+            return redirect('/wrestlers')->with('success', 'Wrestler added.');
 
-            catch (\Exception $e) 
-            {
-                return redirect('add-wrestler')->with('failed', $e->getMessage());
-            }
-        
+        } catch (\Exception $e) {
+            return redirect('add/wrestler')->with('fail', $e->getMessage());
+        }
     }
 
     public function editWrestler($id) {
@@ -80,24 +75,24 @@ class WrestlerController extends Controller
     public function updateWrestler(Request $request, $id) {
 
         $request->validate([
-            'name' => 'required|string',
-            'promotion_id' => 'nullable|integer',
+            'name'         => 'required|string',
+            'promotion_id' => 'nullable|exists:promotions,id',
+            'image'        => 'nullable|url',
+            'hometown'     => 'nullable|string|max:255',
+            'height'       => 'nullable|string|max:50',
+            'weight'       => 'nullable|string|max:50',
+            'bio'          => 'nullable|string',
         ]);
 
         try {
-            $wrestler = Wrestler::find($id);
-            $wrestler->name = $request->input('name');
-            $wrestler->promotion_id = $request->input('promotion_id');
-            $wrestler->save();
+            $wrestler = Wrestler::findOrFail($id);
+            $wrestler->update($request->only(['name', 'promotion_id', 'image', 'hometown', 'height', 'weight', 'bio']));
 
-            return redirect('/wrestlers')->with('success', 'wrestler updated successfully');
-            
-            } 
+            return redirect('/wrestlers')->with('success', 'Wrestler updated.');
 
-            catch (\Exception $e)  {
-                return redirect('editWrestler')->with('failed',$e->getMessage());
-            }
-       
+        } catch (\Exception $e) {
+            return redirect()->back()->with('fail', $e->getMessage());
+        }
     }
 
     public function deleteWrestler($id) {

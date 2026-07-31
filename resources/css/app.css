@@ -12,6 +12,9 @@
 @import "./components/event-card/style.css";
 @import "./components/dashboard-controls/style.css";
 @import "./components/article-form/style.css";
+@import "./components/wrestler-detail/style.css";
+@import "./components/promotion-card/style.css";
+@import "./components/footer/style.css";
 
 @tailwind base;
 @tailwind components;
@@ -132,4 +135,8 @@ inner-column {
 	display: grid;
 	grid-template-columns: repeat(4, minmax(10px, 1fr));
 	gap: 0.8em;
+}
+
+.pagination-wrap {
+	margin-top: 2em;
 }

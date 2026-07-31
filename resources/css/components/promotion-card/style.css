@@ -1,0 +1,38 @@
+.promotion-list {
+    display: grid;
+    gap: 1.2em;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+@media (width > 800px) {
+    .promotion-list {
+        grid-template-columns: repeat(4, 1fr);
+    }
+}
+
+.promotion-list__item {
+    list-style: none;
+}
+
+.promotion-card__heading {
+    display: flex;
+    align-items: center;
+    gap: 0.75em;
+}
+
+.promotion-card__logo {
+    height: 32px;
+    width: auto;
+    object-fit: contain;
+    flex-shrink: 0;
+}
+
+.promotion-card__title {
+    margin: 0;
+}
+
+.promotion-card__body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}

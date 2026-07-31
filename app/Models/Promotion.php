@@ -3,27 +3,24 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-
-use App\Models\Wrestler;
 
 class Promotion extends Model
 {
     use HasFactory;
 
-    public function wrestlers() 
+    protected $fillable = ['name', 'logo'];
+
+    public function wrestlers()
     {
         return $this->hasMany(Wrestler::class);
     }
 
     public function articles()
     {
-        return $this->hasMany(\App\Models\Article::class);
+        return $this->hasMany(Article::class);
     }
-    // protected $casts = [
-    //     'wrestlers' => 'array',
-    // ];
+
     public function events()
     {
         return $this->hasMany(Event::class);
@@ -32,5 +29,10 @@ class Promotion extends Model
     public function bouts()
     {
         return $this->hasMany(Bout::class);
+    }
+
+    public function championships()
+    {
+        return $this->hasMany(Championship::class);
     }
 }
