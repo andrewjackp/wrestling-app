@@ -15,6 +15,8 @@
 @import "./components/wrestler-detail/style.css";
 @import "./components/promotion-card/style.css";
 @import "./components/footer/style.css";
+@import "./components/search/style.css";
+@import "./components/filter-bar/style.css";
 
 @tailwind base;
 @tailwind components;

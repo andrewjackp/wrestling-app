@@ -9,6 +9,7 @@ use App\Models\Event;
 use App\Models\Result;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\SearchController;
 use App\Http\Controllers\WrestlerController;
 
 Route::get('/', function () {
@@ -42,14 +43,19 @@ Route::get('/', function () {
 Route::get('/articles', function() {
     $selectedPromotions = selectedPromotions();
 
-    $query = Article::latest();
+    $query = Article::with('promotion')->latest();
 
     if (!empty($selectedPromotions)) {
         $query->whereIn('promotion_id', $selectedPromotions);
     }
 
+    $filterPromotions = !empty($selectedPromotions)
+        ? Promotion::whereIn('id', $selectedPromotions)->orderBy('name')->get()
+        : collect();
+
     return view('articles', [
-        'articles' => $query->paginate(12)->withQueryString(),
+        'articles'         => $query->paginate(12)->withQueryString(),
+        'filterPromotions' => $filterPromotions,
     ]);
 });
 
@@ -89,6 +95,8 @@ Route::get('/results', function() {
 
 Route::get('/bouts', function() {
     $selectedPromotions = selectedPromotions();
+    $matchType          = request('match_type');
+    $matchTypes         = Bout::whereNotNull('match_type')->distinct()->orderBy('match_type')->pluck('match_type');
 
     $query = Bout::with(['wrestlers', 'promotion', 'event']);
 
@@ -96,8 +104,14 @@ Route::get('/bouts', function() {
         $query->whereIn('promotion_id', $selectedPromotions);
     }
 
+    if ($matchType) {
+        $query->where('match_type', $matchType);
+    }
+
     return view('bouts', [
-        'bouts' => $query->latest()->paginate(20)->withQueryString(),
+        'bouts'             => $query->latest()->paginate(20)->withQueryString(),
+        'matchTypes'        => $matchTypes,
+        'selectedMatchType' => $matchType,
     ]);
 });
 
@@ -176,6 +190,8 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
+
+Route::get('/search', [SearchController::class, 'search'])->name('search');
 
 Route::get('/dashboard', function () {
     $selectedPromotions = selectedPromotions();
