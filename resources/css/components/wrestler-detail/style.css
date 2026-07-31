@@ -58,6 +58,110 @@
     }
 }
 
+/* Record */
+
+.wrestler-detail__record {
+    display: flex;
+    align-items: center;
+    gap: 2px;
+    font-weight: 700;
+    font-size: 1.05rem;
+}
+
+.wrestler-detail__record-w  { color: var(--green); }
+.wrestler-detail__record-l  { color: var(--red); }
+.wrestler-detail__record-nc { color: var(--grey); }
+.wrestler-detail__record-sep { color: var(--lightgrey); font-weight: 400; }
+
+.wrestler-detail__titles {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-top: 1em;
+}
+
+/* Match history */
+
+.wrestler-detail__history {
+    margin-bottom: 2em;
+}
+
+.match-history {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 0.75em;
+    font-size: 0.95rem;
+}
+
+.match-history__head th {
+    text-align: left;
+    padding: 8px 12px;
+    border-bottom: 2px solid var(--xtra-lightgrey);
+}
+
+.match-history__row td {
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--xtra-lightgrey);
+    vertical-align: top;
+}
+
+.match-history__row:last-child td {
+    border-bottom: none;
+}
+
+.match-history__event {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 140px;
+}
+
+.match-history__date {
+    display: block;
+}
+
+.match-history__title {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.match-history__type {
+    display: block;
+}
+
+.match-history__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    font-size: 0.75rem;
+    font-weight: 800;
+}
+
+.match-history__badge--win  { background: var(--lightgreen); color: var(--green); }
+.match-history__badge--loss { background: #fff5f5; color: var(--red); }
+.match-history__badge--nc   { background: #f1f5f9; color: var(--grey); }
+
+@media (width < 700px) {
+    .match-history__finish,
+    .match-history__head th:last-child {
+        display: none;
+    }
+}
+
+/* Promotion section header */
+
+.promotion-section-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1em;
+    margin-bottom: 0.75em;
+}
+
 /* Bout detail */
 
 .bout-detail {

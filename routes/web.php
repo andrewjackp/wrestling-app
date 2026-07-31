@@ -127,10 +127,29 @@ Route::get('/promotions', function() {
 
 
 Route::get('/promotion/{promotion}', function (Promotion $promotion) {
-    $promotion->load(['wrestlers', 'events', 'articles', 'bouts.result.winner', 'championships.holder']);
+    $promotion->load(['wrestlers', 'championships.holder']);
+
+    $recentEvents = $promotion->events()
+        ->orderBy('event_date', 'desc')
+        ->take(5)
+        ->get();
+
+    $recentArticles = $promotion->articles()
+        ->latest()
+        ->take(6)
+        ->get();
+
+    $recentResults = Result::with(['bout.promotion', 'winner'])
+        ->whereHas('bout', fn($q) => $q->where('promotion_id', $promotion->id))
+        ->latest()
+        ->take(10)
+        ->get();
 
     return view('promotion', [
-        'promotion' => $promotion,
+        'promotion'      => $promotion,
+        'recentEvents'   => $recentEvents,
+        'recentArticles' => $recentArticles,
+        'recentResults'  => $recentResults,
     ]);
 })->name('promotion.show');
 

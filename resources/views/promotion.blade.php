@@ -32,9 +32,12 @@
         @endif
 
         <section class="promotion-events">
-            <h2 class="loud-voice">Events</h2>
-            <ul>
-                @forelse($promotion->events as $event)
+            <div class="promotion-section-header">
+                <h2 class="loud-voice">Recent Events</h2>
+                <a class="btn btn--secondary" href="/bouts{{ promotionQuery() }}">All Matches</a>
+            </div>
+            <ul class="event-list">
+                @forelse($recentEvents as $event)
                     <x-event-card :event="$event" />
                 @empty
                     <p class="soft-voice">No events yet.</p>
@@ -43,9 +46,12 @@
         </section>
 
         <section class="promotion-results">
-            <h2 class="loud-voice">Results</h2>
+            <div class="promotion-section-header">
+                <h2 class="loud-voice">Recent Results</h2>
+                <a class="btn btn--secondary" href="/results{{ promotionQuery() }}">All Results</a>
+            </div>
             <ul class="result-list">
-                @forelse($promotion->bouts->map->result->filter() as $result)
+                @forelse($recentResults as $result)
                     <x-result-card :result="$result" />
                 @empty
                     <p class="soft-voice">No results yet.</p>
@@ -54,9 +60,12 @@
         </section>
 
         <section class="promotion-articles">
-            <h2 class="loud-voice">Articles</h2>
+            <div class="promotion-section-header">
+                <h2 class="loud-voice">Recent Articles</h2>
+                <a class="btn btn--secondary" href="/articles{{ promotionQuery() }}">All Articles</a>
+            </div>
             <ul class="article-list">
-                @forelse($promotion->articles as $article)
+                @forelse($recentArticles as $article)
                     <x-article-card :article="$article" />
                 @empty
                     <p class="soft-voice">No articles yet.</p>
@@ -67,9 +76,11 @@
         <section class="promotion-wrestlers">
             <h2 class="loud-voice">Roster</h2>
             <ul class="wrestler-list">
-                @foreach($promotion->wrestlers as $wrestler)
+                @forelse($promotion->wrestlers as $wrestler)
                     <x-wrestler-card :wrestler="$wrestler" />
-                @endforeach
+                @empty
+                    <p class="soft-voice">No wrestlers on roster.</p>
+                @endforelse
             </ul>
         </section>
 

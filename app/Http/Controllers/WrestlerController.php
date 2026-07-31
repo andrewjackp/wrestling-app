@@ -34,11 +34,33 @@ class WrestlerController extends Controller
     }
 
     public function loadWrestler(Wrestler $wrestler) {
-        $wrestler->load('promotion');
+        $wrestler->load([
+            'promotion',
+            'championships',
+            'bouts.result.winner',
+            'bouts.event',
+            'bouts.wrestlers',
+            'bouts.promotion',
+        ]);
+
+        $bouts = $wrestler->bouts->sortByDesc(fn($b) => $b->event?->event_date);
+
+        $boutsWithResults = $bouts->filter(fn($b) => $b->result !== null);
+
+        $wins       = $boutsWithResults->filter(fn($b) => $b->result->winner_id === $wrestler->id)->count();
+        $losses     = $boutsWithResults->filter(fn($b) => $b->result->winner_id !== null && $b->result->winner_id !== $wrestler->id)->count();
+        $noContests = $boutsWithResults->filter(fn($b) => $b->result->winner_id === null)->count();
 
         return view('wrestler', [
-        "wrestler" => $wrestler
-    ]);
+            'wrestler' => $wrestler,
+            'bouts'    => $bouts,
+            'record'   => [
+                'wins'        => $wins,
+                'losses'      => $losses,
+                'no_contests' => $noContests,
+                'total'       => $bouts->count(),
+            ],
+        ]);
     }
     
     public function addWrestler(Request $request): RedirectResponse {
