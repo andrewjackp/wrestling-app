@@ -43,6 +43,19 @@
 
         </div>
       </li>
+               @auth
+                  <li class="nav-item nav-auth">
+                     <span class="nav-user soft-voice">{{ auth()->user()->name }}</span>
+                  </li>
+                  <li>
+                     <form method="POST" action="{{ route('logout') }}" class="nav-logout-form">
+                        @csrf
+                        <button type="submit" class="nav-logout-btn">Sign Out</button>
+                     </form>
+                  </li>
+               @else
+                  <li><a href="{{ route('login') }}">Sign In</a></li>
+               @endauth
             </ul>
          </nav>
       </inner-column>

@@ -1,7 +1,7 @@
 <x-layout>
 <inner-column>
     <div class="article-form-page">
-        <h1 class="attention-voice">Write Article</h1>
+        <h1 class="attention-voice">Edit Article</h1>
 
         @if ($errors->any())
             <div class="article-form__errors">
@@ -13,8 +13,9 @@
             </div>
         @endif
 
-        <form class="article-form" action="{{ route('articles.store') }}" method="POST">
+        <form class="article-form" action="{{ route('articles.update', $article) }}" method="POST">
             @csrf
+            @method('PUT')
 
             <div class="article-form__field">
                 <label class="article-form__label" for="article_title">Title</label>
@@ -23,20 +24,18 @@
                     type="text"
                     id="article_title"
                     name="article_title"
-                    value="{{ old('article_title') }}"
-                    placeholder="Article headline"
+                    value="{{ old('article_title', $article->article_title) }}"
                 >
             </div>
 
             <div class="article-form__field">
-                <label class="article-form__label" for="excerpt">Excerpt <span class="article-form__optional">(optional — shown on article cards)</span></label>
+                <label class="article-form__label" for="excerpt">Excerpt <span class="article-form__optional">(optional)</span></label>
                 <textarea
                     class="article-form__textarea @error('excerpt') article-form__input--error @enderror"
                     id="excerpt"
                     name="excerpt"
                     rows="3"
-                    placeholder="Short teaser shown in article listings..."
-                >{{ old('excerpt') }}</textarea>
+                >{{ old('excerpt', $article->excerpt) }}</textarea>
             </div>
 
             <div class="article-form__field">
@@ -46,8 +45,7 @@
                     id="content"
                     name="content"
                     rows="16"
-                    placeholder="Write the full article..."
-                >{{ old('content') }}</textarea>
+                >{{ old('content', $article->content) }}</textarea>
             </div>
 
             <div class="article-form__row">
@@ -56,7 +54,7 @@
                     <select class="article-form__select" id="promotion_id" name="promotion_id">
                         <option value="">— None —</option>
                         @foreach($promotions as $promotion)
-                            <option value="{{ $promotion->id }}" @selected(old('promotion_id') == $promotion->id)>
+                            <option value="{{ $promotion->id }}" @selected(old('promotion_id', $article->promotion_id) == $promotion->id)>
                                 {{ $promotion->name }}
                             </option>
                         @endforeach
@@ -66,16 +64,22 @@
                 <div class="article-form__field">
                     <label class="article-form__label" for="status">Status</label>
                     <select class="article-form__select" id="status" name="status">
-                        <option value="published" @selected(old('status', 'published') === 'published')>Published</option>
-                        <option value="draft" @selected(old('status') === 'draft')>Draft</option>
+                        <option value="published" @selected(old('status', $article->status) === 'published')>Published</option>
+                        <option value="draft" @selected(old('status', $article->status) === 'draft')>Draft</option>
                     </select>
                 </div>
             </div>
 
             <div class="article-form__actions">
-                <x-submit-btn href="#" variant="secondary">Publish Article</x-submit-btn>
-                <a class="btn btn--secondary" href="/articles">Cancel</a>
+                <x-submit-btn href="#" variant="secondary">Save Changes</x-submit-btn>
+                <a class="btn btn--secondary" href="{{ route('articles.show', $article) }}">Cancel</a>
             </div>
+        </form>
+
+        <form action="{{ route('articles.destroy', $article) }}" method="POST" class="article-form__delete">
+            @csrf
+            @method('DELETE')
+            <button type="submit" class="btn btn--danger" onclick="return confirm('Delete this article?')">Delete Article</button>
         </form>
     </div>
 </inner-column>

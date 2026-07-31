@@ -7,6 +7,7 @@ use App\Models\Bout;
 use App\Models\Promotion;
 use App\Models\Event;
 use App\Models\Result;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\WrestlerController;
 
@@ -52,7 +53,7 @@ Route::get('/articles', function() {
     ]);
 });
 
-Route::get('/article-detail/{article}', function (Article $article) {
+Route::get('/articles/{article}', function (Article $article) {
     return view('article-detail', [
         'article' => $article,
     ]);
@@ -141,8 +142,22 @@ Route::get('/promotion/{promotion}', function (Promotion $promotion) {
 // });
 
 
-Route::get('/post/create', [PostController::class, 'create']);
-Route::post('/post', [PostController::class, 'store']);
+Route::middleware('auth')->group(function () {
+    Route::get('/post/create', [PostController::class, 'create'])->name('articles.create');
+    Route::post('/post', [PostController::class, 'store'])->name('articles.store');
+    Route::get('/article/{article}/edit', [PostController::class, 'edit'])->name('articles.edit');
+    Route::put('/article/{article}', [PostController::class, 'update'])->name('articles.update');
+    Route::delete('/article/{article}', [PostController::class, 'destroy'])->name('articles.destroy');
+});
+
+Route::middleware('guest')->group(function () {
+    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+    Route::post('/login', [AuthController::class, 'login']);
+    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+    Route::post('/register', [AuthController::class, 'register']);
+});
+
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout')->middleware('auth');
 
 Route::get('/dashboard', function () {
     $selectedPromotions = selectedPromotions();

@@ -47,7 +47,7 @@
     </div>
 
     <div class="article-card__actions">
-      <x-button-link href="/article-detail/{{ $article->id }}">
+      <x-button-link href="{{ route('articles.show', $article) }}">
         Read More
       </x-button-link>
     </div>

@@ -11,6 +11,7 @@
 @import "./components/result-card/style.css";
 @import "./components/event-card/style.css";
 @import "./components/dashboard-controls/style.css";
+@import "./components/article-form/style.css";
 
 @tailwind base;
 @tailwind components;
@@ -22,6 +23,28 @@ header nav ul {
 	flex-wrap: wrap;
 	gap: 20px;
 	padding: var(--standard-padding);
+	align-items: center;
+}
+
+.nav-user {
+	color: var(--grey);
+}
+
+.nav-logout-form {
+	display: contents;
+}
+
+.nav-logout-btn {
+	background: none;
+	border: none;
+	padding: 0;
+	font-size: inherit;
+	cursor: pointer;
+	color: inherit;
+}
+
+.nav-logout-btn:hover {
+	text-decoration: underline;
 }
 
 body {
@@ -32,7 +55,6 @@ body {
 
 main {
 	flex-grow: 1;
-	border: 1px solid green;
 }
 
 inner-column {
