@@ -21,7 +21,7 @@
       >
 
       <div class="article-card__tag-overlay">
-        <x-tag>News</x-tag>
+        <x-tag>{{ $article->category ?? 'News' }}</x-tag>
       </div>
     </picture>
 

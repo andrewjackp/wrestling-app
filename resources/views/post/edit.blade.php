@@ -62,12 +62,28 @@
                 </div>
 
                 <div class="article-form__field">
+                    <label class="article-form__label" for="category">Category</label>
+                    <select class="article-form__select" id="category" name="category">
+                        <option value="">— None —</option>
+                        @foreach(['News', 'Review', 'Opinion', 'Results', 'Feature'] as $cat)
+                            <option value="{{ $cat }}" @selected(old('category', $article->category) === $cat)>{{ $cat }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
+                <div class="article-form__field">
                     <label class="article-form__label" for="status">Status</label>
                     <select class="article-form__select" id="status" name="status">
                         <option value="published" @selected(old('status', $article->status) === 'published')>Published</option>
                         <option value="draft" @selected(old('status', $article->status) === 'draft')>Draft</option>
                     </select>
                 </div>
+            </div>
+
+            <div class="article-form__field article-form__field--checkbox">
+                <input type="hidden" name="featured" value="0">
+                <input type="checkbox" id="featured" name="featured" value="1" @checked(old('featured', $article->featured))>
+                <label class="article-form__label article-form__label--inline" for="featured">Feature this article on the homepage</label>
             </div>
 
             <div class="article-form__actions">

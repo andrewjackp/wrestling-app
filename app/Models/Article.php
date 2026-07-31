@@ -19,10 +19,13 @@ class Article extends Model
         'author_id',
         'status',
         'published_at',
+        'category',
+        'featured',
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
+        'featured'     => 'boolean',
     ];
 
     public function getRouteKeyName(): string

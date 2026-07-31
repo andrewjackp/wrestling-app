@@ -24,9 +24,12 @@ class PostController extends Controller
             'content'       => 'required|string',
             'promotion_id'  => 'nullable|exists:promotions,id',
             'status'        => 'in:draft,published',
+            'category'      => 'nullable|in:News,Review,Opinion,Results,Feature',
+            'featured'      => 'boolean',
         ]);
 
         $validated['author_id'] = auth()->id();
+        $validated['featured'] = $request->boolean('featured');
 
         $article = Article::create($validated);
 
@@ -47,7 +50,11 @@ class PostController extends Controller
             'content'       => 'required|string',
             'promotion_id'  => 'nullable|exists:promotions,id',
             'status'        => 'in:draft,published',
+            'category'      => 'nullable|in:News,Review,Opinion,Results,Feature',
+            'featured'      => 'boolean',
         ]);
+
+        $validated['featured'] = $request->boolean('featured');
 
         if ($article->status === 'draft' && ($validated['status'] ?? 'published') === 'published') {
             $validated['published_at'] = now();

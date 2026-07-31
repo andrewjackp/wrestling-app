@@ -3,6 +3,9 @@
     <article class="article-detail">
 
       <header class="article-detail__header">
+        @if($article->category)
+          <x-tag>{{ $article->category }}</x-tag>
+        @endif
         @if($article->promotion)
           <x-tag class="tag--success">{{ $article->promotion->name }}</x-tag>
         @endif
@@ -24,8 +27,8 @@
         @endif
       </header>
 
-      <div class="article-detail__body">
-        {!! nl2br(e($article->content)) !!}
+      <div class="article-detail__body article-detail__body--prose">
+        {!! Illuminate\Support\Str::markdown($article->content) !!}
       </div>
 
       <footer class="article-detail__footer">
